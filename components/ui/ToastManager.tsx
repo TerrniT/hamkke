@@ -1,5 +1,6 @@
 import { Toast, useToastState } from "@tamagui/toast"
 import { YStack } from "tamagui"
+import React from "react"
 
 export const ToastManager = () => {
   const currentToast = useToastState()

@@ -1,6 +1,6 @@
 import { create } from "zustand";
-import { db } from "../helpers/db";
-import { AuthState, LoadingState } from "./types";
+import { db } from "helpers/db";
+import { AuthState, LoadingState } from "../types";
 
 const useAuthStore = create<AuthState>((set) => ({
   session: null,
@@ -25,7 +25,7 @@ const useAuthStore = create<AuthState>((set) => ({
     const { data, error } = await db.auth.signUp({
       email,
       password,
-    });
+    })
     if (error) return Promise.reject(error);
 
     set({ session: data.session });

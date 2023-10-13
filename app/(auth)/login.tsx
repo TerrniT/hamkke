@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Alert, StyleSheet, View } from 'react-native'
-import { db } from "../../helpers/db"
+import { db } from "helpers/db"
 import { useToastState } from '@tamagui/toast'
-import { useAuthStore, useLoadingStore } from '../../store/store'
+import { useAuthStore, useLoadingStore } from 'stores/auth/store'
 import { AuthError, User } from '@supabase/supabase-js'
-import { StyledView } from '../ui/styled'
+import { StyledView } from 'components/ui/styled'
 
 import { Button, SizableText, Spinner, XStack, Input, Label, YStack, H1 } from 'tamagui'
 

@@ -1,6 +1,17 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "jsx": "react-jsx",
+    "baseUrl": "./",
+    "paths": {
+      // This needs to be mirrored in babel.config.js
+      // Components is a directory with sub directories
+      "components/*": ["components/*"],
+      "screens/*": ["/app/*"],
+      "helpers/*": ["helpers/*"],
+      "stores/": ["stores/*"],
+      "ui/": ["components/ui/*"],
+    }
   }
 }

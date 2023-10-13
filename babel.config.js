@@ -3,9 +3,20 @@ module.exports = function(api) {
   return {
     presets: ["babel-preset-expo"],
     plugins: [
-      // optional, only if you ever use process.env
-      "transform-inline-environment-variables",
-      // NOTE: this is optional, you don't *need* the compiler
+      [
+        "module-resolver",
+        {
+          extensions: [".ts", ".tsx", ".js", ".json", ".jsx", "android.tsx", "ios.tsx"],
+          alias: {
+            components: "components",
+            screens: "app/",
+            helpers: "helpers",
+            stores: "stores",
+            ui: "components/ui",
+          }
+        }
+      ],
+      
       [
         "@tamagui/babel-plugin",
         {
@@ -14,8 +25,9 @@ module.exports = function(api) {
           logTimings: true,
         },
       ],
-      // NOTE: this is only necessary if you are using reanimated for animations
       "react-native-reanimated/plugin",
+      "expo-router/babel",
+      "transform-inline-environment-variables",
     ],
   };
 }
