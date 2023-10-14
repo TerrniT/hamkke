@@ -1,8 +1,13 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "target": "ESNext",
     "strict": true,
-    "jsx": "react-jsx",
+    "jsx": "react-native",
+    "noEmit": true,
+    "isolatedModules": true,
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
       // This needs to be mirrored in babel.config.js
@@ -13,5 +18,11 @@
       "stores/": ["stores/*"],
       "ui/": ["components/ui/*"],
     }
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "jest.config.js",
+    "metro.config.js"
+  ]
 }

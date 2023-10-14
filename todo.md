@@ -1,0 +1,4 @@
+- [x] add eslint + typescript settings
+- [ ] start create basic layout for main page
+- [ ] add test coverage (vitest, jest, whatever)
+- [ ] create readme file via nice photoshoots

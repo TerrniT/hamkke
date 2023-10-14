@@ -1,27 +1,15 @@
-import { Suspense, useEffect } from "react";
-import { Slot, SplashScreen } from "expo-router";
-import {useFonts} from 'expo-font';
-import { TamaguiProvider, Text, Theme } from "tamagui";
-import { useColorScheme } from "react-native";
+import { useEffect } from "react";
+import { SplashScreen } from "expo-router";
+import { useFonts } from 'expo-font';
+import { TamaguiProvider } from "tamagui";
 import tamaguiConfig from '../tamagui.config';
-
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider
-} from "@react-navigation/native";
-import { AuthProvider, useAuth } from "context/auth";
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
+import { AuthProvider } from "context/auth";
+import RootLayoutNav from "layouts/root";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-
   const [loaded, error] = useFonts({
     Inter: require("@tamagui/font-inter/otf/Inter-Medium.otf"),
     InterBold: require("@tamagui/font-inter/otf/Inter-Bold.otf")
@@ -29,7 +17,8 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (error) throw error;
-  }, [error]);
+  }, [error])
+
 
   useEffect(() => {
     if (loaded) {
@@ -37,34 +26,13 @@ export default function RootLayout() {
     }
   }, [loaded]);
 
-  if(!loaded) return null
+  if (!loaded) return null
 
   return (
     <AuthProvider>
       <TamaguiProvider config={tamaguiConfig}>
-         <RootLayoutNav/>
+        <RootLayoutNav />
       </TamaguiProvider>
     </AuthProvider>
   )
 }
-
-
-export function RootLayoutNav() {
-  const colorScheme = useColorScheme()
-  const {session, authInitialized } = useAuth()
-
-  return (
-      <Suspense fallback={<Text>Loading...</Text>}>
-        <Theme name={colorScheme}>
-          <ThemeProvider
-            value={colorScheme === "light" ? DefaultTheme : DarkTheme}
-          >
-            <Slot/>
-          </ThemeProvider>
-        </Theme>
-      </Suspense>
-
-  )
-
-}
-

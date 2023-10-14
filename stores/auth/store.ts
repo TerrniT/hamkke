@@ -32,10 +32,10 @@ const useAuthStore = create<AuthState>((set) => ({
     return Promise.resolve(data.user);
   },
   logout: async () => {
-    const { error } = await db.auth.signOut();
-    if (error) return Promise.reject(error);
-    set({ session: null });
-    return Promise.resolve();
+    const { error } = await db.auth.signOut()
+    if (error) return Promise.reject(error)
+    set({ session: null })
+    return Promise.resolve()
   },
 }))
 
