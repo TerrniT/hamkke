@@ -1,22 +1,30 @@
-module.exports = function(api) {
-  api.cache(true);
+module.exports = function (api) {
+  api.cache(true)
   return {
     presets: ["babel-preset-expo"],
     plugins: [
       [
         "module-resolver",
         {
-          extensions: [".ts", ".tsx", ".js", ".json", ".jsx", "android.tsx", "ios.tsx"],
+          extensions: [
+            ".ts",
+            ".tsx",
+            ".js",
+            ".json",
+            ".jsx",
+            "android.tsx",
+            "ios.tsx",
+          ],
           alias: {
             components: "components",
-            screens: "app/",
+            screens: "app",
             helpers: "helpers",
             stores: "stores",
             ui: "components/ui",
-          }
-        }
+          },
+        },
       ],
-      
+
       [
         "@tamagui/babel-plugin",
         {
@@ -29,5 +37,5 @@ module.exports = function(api) {
       "expo-router/babel",
       "transform-inline-environment-variables",
     ],
-  };
+  }
 }

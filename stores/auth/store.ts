@@ -1,35 +1,36 @@
-import { create } from "zustand";
-import { db } from "helpers/db";
-import { AuthState, LoadingState } from "../types";
+import { db } from "helpers/db"
+import { create } from "zustand"
+
+import { AuthState, LoadingState } from "../types"
 
 const useAuthStore = create<AuthState>((set) => ({
   session: null,
   setSession: (session) => set({ session }),
   login: async (email, password) => {
-    if (!email) return Promise.reject("Email is required");
-    if (!password) return Promise.reject("Password is required");
+    if (!email) return Promise.reject("Email is required")
+    if (!password) return Promise.reject("Password is required")
 
     const { data, error } = await db.auth.signInWithPassword({
       email,
       password,
-    });
-    if (error) return Promise.reject(error);
+    })
+    if (error) return Promise.reject(error)
 
-    set({ session: data.session });
-    return Promise.resolve(data.user);
+    set({ session: data.session })
+    return Promise.resolve(data.user)
   },
   register: async (email, password) => {
-    if (!email) return Promise.reject("Email is required");
-    if (!password) return Promise.reject("Password is required");
+    if (!email) return Promise.reject("Email is required")
+    if (!password) return Promise.reject("Password is required")
 
     const { data, error } = await db.auth.signUp({
       email,
       password,
     })
-    if (error) return Promise.reject(error);
+    if (error) return Promise.reject(error)
 
-    set({ session: data.session });
-    return Promise.resolve(data.user);
+    set({ session: data.session })
+    return Promise.resolve(data.user)
   },
   logout: async () => {
     const { error } = await db.auth.signOut()
@@ -41,10 +42,7 @@ const useAuthStore = create<AuthState>((set) => ({
 
 const useLoadingStore = create<LoadingState>((set) => ({
   isLoading: false,
-  setLoading: (isLoading) => set({ isLoading })
+  setLoading: (isLoading) => set({ isLoading }),
 }))
 
 export { useAuthStore, useLoadingStore }
-
-
-

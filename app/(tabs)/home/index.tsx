@@ -1,11 +1,9 @@
-import { Button, Input, XStack } from 'tamagui'
-import { SheetDemo } from 'components/ui/AlertDialog'
+import { SheetDemo } from "components/ui/AlertDialog"
 import { StyledView } from "components/ui/styled/index"
-import { useAuthStore } from 'stores/auth/store'
-import { Stack } from 'expo-router'
+import { useAuthStore } from "stores/auth/store"
+import { Button } from "tamagui"
 
 export default function Main() {
-
   const { logout } = useAuthStore()
 
   async function logoutOnPress() {
@@ -20,6 +18,3 @@ export default function Main() {
     </StyledView>
   )
 }
-
-
-

@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "celebi",
-    "slug": "celebi",
+    "name": "hamkke",
+    "slug": "hamkke",
     "version": "1.0.0",
-    "scheme": "com.terrnit.celebi",
+    "scheme": "com.terrnit.hamkke",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "auto",

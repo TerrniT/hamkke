@@ -1,14 +1,10 @@
-import { ChevronDown, ChevronUp } from '@tamagui/lucide-icons'
+import { ChevronDown, ChevronUp } from "@tamagui/lucide-icons"
+import { Sheet, SheetProps } from "@tamagui/sheet"
+import { useState } from "react"
+import { Button, H2, Input, Paragraph, XStack, YStack } from "tamagui"
 
-import { Sheet, SheetProps, useSheet } from '@tamagui/sheet'
-
-import { useState } from 'react'
-
-import { Button, H1, H2, Input, Paragraph, XStack, YStack } from 'tamagui'
-
-const spModes = ['percent', 'constant', 'fit', 'mixed'] as const
+const spModes = ["percent", "constant", "fit", "mixed"] as const
 export const SheetDemo = () => {
-
   const [position, setPosition] = useState(0)
 
   const [open, setOpen] = useState(false)
@@ -18,89 +14,67 @@ export const SheetDemo = () => {
   const [innerOpen, setInnerOpen] = useState(false)
 
   const [snapPointsMode, setSnapPointsMode] =
-
-    useState<(typeof spModes)[number]>('percent')
+    useState<(typeof spModes)[number]>("percent")
 
   const [mixedFitDemo, setMixedFitDemo] = useState(false)
-  const isPercent = snapPointsMode === 'percent'
+  const isPercent = snapPointsMode === "percent"
 
-  const isConstant = snapPointsMode === 'constant'
+  const isConstant = snapPointsMode === "constant"
 
-  const isFit = snapPointsMode === 'fit'
+  const isFit = snapPointsMode === "fit"
 
-  const isMixed = snapPointsMode === 'mixed'
+  const isMixed = snapPointsMode === "mixed"
 
-  const hasFit = isFit || (isMixed && mixedFitDemo)
+  //   const hasFit = isFit || (isMixed && mixedFitDemo)
 
   const snapPoints = isPercent
-
     ? [85, 50, 25]
-
     : isConstant
-
       ? [256, 190]
-
       : isFit
-
         ? undefined
-
         : mixedFitDemo
-
-          ? ['fit', 110]
-
-          : ['80%', 256, 190]
+          ? ["fit", 110]
+          : ["80%", 256, 190]
   return (
-
     <>
-
       <YStack space>
-
-        <XStack space $sm={{ flexDirection: 'column', alignItems: 'center' }}>
-
+        <XStack space $sm={{ flexDirection: "column", alignItems: "center" }}>
           <Button onPress={() => setOpen(true)}>Open</Button>
 
           <Button onPress={() => setModal((x) => !x)}>
-
-            {modal ? 'Type: Modal' : 'Type: Inline'}
-
+            {modal ? "Type: Modal" : "Type: Inline"}
           </Button>
 
           <Button
             onPress={() =>
               setSnapPointsMode(
-                (prev) => spModes[(spModes.indexOf(prev) + 1) % spModes.length]
+                (prev) => spModes[(spModes.indexOf(prev) + 1) % spModes.length],
               )
             }
           >
-
-            {`Mode: ${{ percent: 'Percentage', constant: 'Constant', fit: 'Fit', mixed: 'Mixed' }[
-              snapPointsMode
-            ]
-              }`}
-
+            {`Mode: ${
+              {
+                percent: "Percentage",
+                constant: "Constant",
+                fit: "Fit",
+                mixed: "Mixed",
+              }[snapPointsMode]
+            }`}
           </Button>
-
         </XStack>
 
         {isMixed ? (
-
           <Button onPress={() => setMixedFitDemo((x) => !x)}>
-
             {`Snap Points: ${JSON.stringify(snapPoints)}`}
-
           </Button>
-
         ) : (
-
           <XStack paddingVertical="$2.5" justifyContent="center">
-
-            <Paragraph>{`Snap Points: ${isFit ? '(none)' : JSON.stringify(snapPoints)
-              }`}</Paragraph>
-
+            <Paragraph>{`Snap Points: ${
+              isFit ? "(none)" : JSON.stringify(snapPoints)
+            }`}</Paragraph>
           </XStack>
-
         )}
-
       </YStack>
       <Sheet
         forceRemoveScrollEnabled={open}
@@ -115,7 +89,6 @@ export const SheetDemo = () => {
         zIndex={100_000}
         animation="medium"
       >
-
         <Sheet.Overlay
           animation="lazy"
           enterStyle={{ opacity: 0 }}
@@ -124,12 +97,20 @@ export const SheetDemo = () => {
 
         <Sheet.Handle />
 
-        <Sheet.Frame padding="$4" justifyContent="center" alignItems="center" space="$5">
-
-          <Button size="$6" circular icon={ChevronDown} onPress={() => setOpen(false)} />
+        <Sheet.Frame
+          padding="$4"
+          justifyContent="center"
+          alignItems="center"
+          space="$5"
+        >
+          <Button
+            size="$6"
+            circular
+            icon={ChevronDown}
+            onPress={() => setOpen(false)}
+          />
           <Input width={200} />
           {modal && isPercent && (
-
             <>
               <InnerSheet open={innerOpen} onOpenChange={setInnerOpen} />
 
@@ -142,20 +123,19 @@ export const SheetDemo = () => {
             </>
           )}
         </Sheet.Frame>
-
       </Sheet>
-
     </>
-
   )
-
 }
 function InnerSheet(props: SheetProps) {
-
   return (
-
-    <Sheet animation="medium" modal snapPoints={[90]} dismissOnSnapToBottom {...props}>
-
+    <Sheet
+      animation="medium"
+      modal
+      snapPoints={[90]}
+      dismissOnSnapToBottom
+      {...props}
+    >
       <Sheet.Overlay
         animation="medium"
         enterStyle={{ opacity: 0 }}
@@ -164,12 +144,14 @@ function InnerSheet(props: SheetProps) {
 
       <Sheet.Handle />
 
-      <Sheet.Frame flex={1} justifyContent="center" alignItems="center" space="$5">
-
+      <Sheet.Frame
+        flex={1}
+        justifyContent="center"
+        alignItems="center"
+        space="$5"
+      >
         <Sheet.ScrollView>
-
           <YStack p="$5" gap="$8">
-
             <Button
               size="$6"
               circular
@@ -181,34 +163,18 @@ function InnerSheet(props: SheetProps) {
             <H2>Hello world</H2>
 
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-
               <Paragraph key={i} size="$8">
-
-                Eu officia sunt ipsum nisi dolore labore est laborum laborum in esse ad
-
-                pariatur. Dolor excepteur esse deserunt voluptate labore ea. Exercitation
-
-                ipsum deserunt occaecat cupidatat consequat est adipisicing velit
-
-                cupidatat ullamco veniam aliquip reprehenderit officia. Officia labore
-
-                culpa ullamco velit. In sit occaecat velit ipsum fugiat esse aliqua dolor
-
-                sint.
-
+                Eu officia sunt ipsum nisi dolore labore est laborum laborum in
+                esse ad pariatur. Dolor excepteur esse deserunt voluptate labore
+                ea. Exercitation ipsum deserunt occaecat cupidatat consequat est
+                adipisicing velit cupidatat ullamco veniam aliquip reprehenderit
+                officia. Officia labore culpa ullamco velit. In sit occaecat
+                velit ipsum fugiat esse aliqua dolor sint.
               </Paragraph>
-
             ))}
-
           </YStack>
-
         </Sheet.ScrollView>
-
       </Sheet.Frame>
-
     </Sheet>
-
   )
-
 }
-
